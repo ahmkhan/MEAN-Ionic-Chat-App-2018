@@ -1,0 +1,7 @@
+.authTabsMainDiv {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::ng-deep .mat-tab-label {
+    width: 50%
+}
