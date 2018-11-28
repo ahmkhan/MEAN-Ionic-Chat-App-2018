@@ -1,9 +1,15 @@
 <div class="signup-container">
 
   <h2>SIGN-UP</h2>
+
+    <mat-form-field>
+      <input matInput placeholder="Enter your Full Name" [formControl]="fullname" required>
+    </mat-form-field>
+
+    <br>
   
     <mat-form-field>
-        <input matInput placeholder="Enter your Full Name" [formControl]="username" required>
+        <input matInput placeholder="Enter your User Name" [formControl]="username" required>
       </mat-form-field>
 
       <br>
@@ -19,4 +25,8 @@
     <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" [formControl]="password" required>
       <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
   </mat-form-field>
+
+  <br>
+
+  <button mat-stroked-button class="signUpBtn" (click)="signUpBtn()">Sign Up</button>
 </div>

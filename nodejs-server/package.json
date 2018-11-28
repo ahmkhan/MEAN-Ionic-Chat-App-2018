@@ -1,0 +1,29 @@
+{
+  "name": "nodejs-server",
+  "version": "1.0.0",
+  "description": "Desktop & Mobile Chat Application ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmkhan/MEAN-Ionic-Chat-App-2018.git"
+  },
+  "keywords": [
+    "Chat",
+    "App"
+  ],
+  "author": "Mohammed Ahmer Khan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahmkhan/MEAN-Ionic-Chat-App-2018/issues"
+  },
+  "homepage": "https://github.com/ahmkhan/MEAN-Ionic-Chat-App-2018#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.14",
+    "morgan": "^1.9.1"
+  }
+}

@@ -1,12 +1,23 @@
 .signup-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .signup-container > * {
-    width: 70%;
+    width: 50%;
 }
 
 .signup-container > h2 {
-    text-align: center
+    text-align: center;
+    display: inline-block;
+    background-color: #7b1fa2;
+    padding: 10px 0 10px 0
+}
+
+.signup-container > .signUpBtn {
+    background-color: #7b1fa2;
+    width: 20%;
+    border-color: #7b1fa2;
 }
