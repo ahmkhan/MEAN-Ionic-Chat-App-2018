@@ -37,6 +37,7 @@ import {
   MatTabsModule
 } from '@angular/material';
 import {MatTableModule} from '@angular/material/table';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AuthTabsComponent } from '../components/auth-tabs/auth-tabs.component';
 import { LoginComponent } from '../components/login/login.component';
@@ -77,7 +78,9 @@ import { SignupComponent } from '../components/signup/signup.component';
     MatSortModule,
     MatStepperModule,
     MatDividerModule,
-    MatTabsModule
+    MatTabsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [AuthTabsComponent, LoginComponent, SignupComponent],
   exports: [
