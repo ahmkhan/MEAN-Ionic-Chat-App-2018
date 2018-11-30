@@ -21,8 +21,11 @@
   },
   "homepage": "https://github.com/ahmkhan/MEAN-Ionic-Chat-App-2018#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
+    "http-status-code": "^2.1.0",
+    "joi": "^14.3.0",
     "mongoose": "^5.3.14",
     "morgan": "^1.9.1"
   }
