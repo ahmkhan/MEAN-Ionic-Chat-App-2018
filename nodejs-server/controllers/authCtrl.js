@@ -20,7 +20,7 @@ module.exports.registerNewUser = async (req, res) => {
     const {error, value} = Joi.validate(userObj, userSchemaToValidate);
 
     if (error && error.details) {
-        return res.status(HttpStatus.BAD_REQUEST).json({message:'Error In User Schema Obj', error: error})
+        return res.status(HttpStatus.BAD_REQUEST).json({message:'Error In User Schema Validation', errorMsg: error.details})
     }
 
     const userNameExists = await UserSchema.findOne({UserName: HelperFunctions.FirstLetterUpperCase(value.UserName)});

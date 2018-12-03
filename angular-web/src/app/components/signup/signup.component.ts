@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
+
 import {AuthService} from '../../services/auth.service';
 
 @Component({
@@ -8,55 +10,47 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  fullname = new FormControl('', [Validators.required]);
-  username = new FormControl('', [Validators.required]);
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required]);
-  hide = true;
+  signupForm: FormGroup;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private popupMsg: MatSnackBar) { }
 
   ngOnInit() {
+    this.createSignUpForm();
   }
 
-  getErrorMessage() {
-    return this.email.hasError('required') ? 'You must enter a value' :
-        this.email.hasError('email') ? 'Not a valid email' : '';
+  createSignUpForm() {
+    this.signupForm = this.formBuilder.group({
+      FullName: ['', Validators.required],
+      UserName: ['', Validators.required],
+      Email: ['', [Validators.required, Validators.email]],
+      Password: ['', [Validators.required]]
+    });
   };
 
   signUpBtn() {
-    if (!this.fullname.value) {
-      alert('Please Enter Full Name');
-      return;
-    }
-    if (!this.username.value) {
-      alert('Please Enter User Name');
-      return;
-    }
-    if (!this.email.value) {
-      alert('Please Enter Email');
-      return;
-    }
-    if (!this.password.value) {
-      alert('Please Enter Password');
-      return;
-    }
+    let snackBarConfig = new MatSnackBarConfig();
+    snackBarConfig.panelClass = ['custom-class'];
+    snackBarConfig.duration = 3000;
+    snackBarConfig.verticalPosition = 'top';
 
-    let signUpUserObj = {
-      FullName: this.fullname.value,
-      UserName: this.username.value,
-      Email: this.email.value,
-      Password: this.password.value
-    };
-
-    this.authService.registerNewUserService('/registerNewUser', signUpUserObj).subscribe((userData) => {
+    this.authService.registerNewUserService('/registerNewUser', this.signupForm.value).subscribe((userData) => {
       console.log('userData', userData);
-      this.fullname = new FormControl('', [Validators.required]);;
-      this.username = new FormControl('', [Validators.required]);;
-      this.email = new FormControl('', [Validators.required, Validators.email]);
-      this.password = new FormControl('', [Validators.required]);
+      if (userData.message == 'User Successfully Saved in DB') {
+        this.popupMsg.open(userData.message, '', snackBarConfig);
+      }
     }, (signupError) => {
-      console.log('signUpError', signupError);
+      console.log('signUpError', signupError.error.message);
+      if (signupError && signupError.error && signupError.error.errorMsg) {
+        this.popupMsg.open(signupError.error.errorMsg[0].message, '', snackBarConfig);
+      }
+
+      if (signupError.error.message == 'This User Name Already Exists in DB') {
+        this.popupMsg.open(signupError.error.message, '', snackBarConfig);
+      }
+      
+      if (signupError.error.message == 'This Email Address Already Exists in DB') {
+        this.popupMsg.open(signupError.error.message, '', snackBarConfig);
+      }
     }); 
   };
 

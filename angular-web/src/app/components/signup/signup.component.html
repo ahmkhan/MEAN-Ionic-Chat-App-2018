@@ -2,31 +2,39 @@
 
   <h2>SIGN-UP</h2>
 
-    <mat-form-field>
-      <input matInput placeholder="Enter your Full Name" [formControl]="fullname" required>
-    </mat-form-field>
+  <form [formGroup]="signupForm" novalidate (ngSubmit)="signUpBtn()">
 
-    <br>
-  
     <mat-form-field>
-        <input matInput placeholder="Enter your User Name" [formControl]="username" required>
+        <input matInput placeholder="Enter your Full Name" formControlName="FullName" class="form-control" required>
+        <mat-error *ngIf="!signupForm.controls['FullName'].valid && signupForm.controls['FullName'].touched">Full Name is required!!!</mat-error>
       </mat-form-field>
 
       <br>
-  
-  <mat-form-field>
-    <input matInput placeholder="Enter your email" [formControl]="email" required>
-    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-  </mat-form-field>
+      <br>
 
-  <br>
+      <mat-form-field>
+          <input matInput placeholder="Enter your User Name" formControlName="UserName" class="form-control" required>
+          <mat-error *ngIf="!signupForm.controls['UserName'].valid && signupForm.controls['UserName'].touched">User Name is required!!!</mat-error>
+      </mat-form-field>
 
-  <mat-form-field>
-    <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" [formControl]="password" required>
-      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-  </mat-form-field>
+      <br>
+      <br>
+    
+    <mat-form-field>
+      <input matInput type="email" placeholder="Enter your email" formControlName="Email" class="form-control" required>
+      <mat-error *ngIf="!signupForm.controls['Email'].valid && signupForm.controls['Email'].touched">Email Address is required!!!</mat-error>
+    </mat-form-field>
 
-  <br>
+      <br>
+      <br>
 
-  <button mat-stroked-button class="signUpBtn" (click)="signUpBtn()">Sign Up</button>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Enter your password" formControlName="Password" class="form-control" autocomplete="new-password" required>
+      <mat-error *ngIf="!signupForm.controls['Password'].valid && signupForm.controls['Password'].touched">Password is required!!!</mat-error>
+    </mat-form-field>
+
+      <br>
+
+    <button type="submit" mat-stroked-button class="signUpBtn" [disabled]="!signupForm.valid">Sign Up</button>
+  </form>
 </div>
