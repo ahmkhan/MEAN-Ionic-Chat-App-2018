@@ -1,8 +1,11 @@
 const Joi                   = require('joi');
 const HttpStatus            = require('http-status-codes');
 const PasswordEncrypt       = require('bcryptjs');
+const JWT                   = require('jsonwebtoken');
+
 const UserSchema            = require('../schemas/userSchema');
 const HelperFunctions       = require('../helpers/helperFunctions');
+const Config                = require('../config/secret');
 
 
 module.exports.registerNewUser = async (req, res) => {
@@ -20,16 +23,16 @@ module.exports.registerNewUser = async (req, res) => {
         return res.status(HttpStatus.BAD_REQUEST).json({message:'Error In User Schema Obj', error: error})
     }
 
-    const userEmailExists = await UserSchema.findOne({Email: HelperFunctions.allLowerCase(value.Email)});
-
-    if (userEmailExists) {
-        return res.status(HttpStatus.CONFLICT).json({message:'This Email Address Already Exists in DB', error: userEmailExists});
-    }
-
     const userNameExists = await UserSchema.findOne({UserName: HelperFunctions.FirstLetterUpperCase(value.UserName)});
 
     if (userNameExists) {
         return res.status(HttpStatus.CONFLICT).json({message:'This User Name Already Exists in DB', error: userNameExists});
+    }
+
+    const userEmailExists = await UserSchema.findOne({Email: HelperFunctions.allLowerCase(value.Email)});
+
+    if (userEmailExists) {
+        return res.status(HttpStatus.CONFLICT).json({message:'This Email Address Already Exists in DB', error: userEmailExists});
     }
 
     return PasswordEncrypt.hash(value.Password, 10, (err, hash) => {
@@ -45,7 +48,11 @@ module.exports.registerNewUser = async (req, res) => {
         };
 
         UserSchema.create(UserDataToSave).then((UserSave) => {
-            res.status(HttpStatus.CREATED).json({message:'User Successfully Saved in DB', userData: UserSave});
+            let token = JWT.sign({userData: UserDataToSave}, Config.secretKey, {expiresIn: 120});
+            if (token) {
+                res.cookie('auth', token);
+                res.status(HttpStatus.CREATED).json({message:'User Successfully Saved in DB', userData: UserSave, token: token});
+            }
         }).catch((UserSaveError) => {
             res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message:'Error in User Saving in DB', userData: UserSaveError});
         }) 

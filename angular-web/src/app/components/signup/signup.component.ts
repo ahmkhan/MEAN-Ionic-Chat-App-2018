@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +14,7 @@ export class SignupComponent implements OnInit {
   password = new FormControl('', [Validators.required]);
   hide = true;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -40,6 +41,23 @@ export class SignupComponent implements OnInit {
       alert('Please Enter Password');
       return;
     }
+
+    let signUpUserObj = {
+      FullName: this.fullname.value,
+      UserName: this.username.value,
+      Email: this.email.value,
+      Password: this.password.value
+    };
+
+    this.authService.registerNewUserService('/registerNewUser', signUpUserObj).subscribe((userData) => {
+      console.log('userData', userData);
+      this.fullname = new FormControl('', [Validators.required]);;
+      this.username = new FormControl('', [Validators.required]);;
+      this.email = new FormControl('', [Validators.required, Validators.email]);
+      this.password = new FormControl('', [Validators.required]);
+    }, (signupError) => {
+      console.log('signUpError', signupError);
+    }); 
   };
 
 }
