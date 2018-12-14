@@ -2,8 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { AuthModule } from './customModules/auth.module';
-import { AuthRoutingModule } from './customModules/auth-routing.module';
+import { AuthModule } from './customModules/AuthModule/auth.module';
+import { AuthRoutingModule } from './customModules/AuthModule/auth-routing.module';
+import { StreamModule } from './customModules/StreamModule/stream.module';
+import { StreamRoutingModule } from './customModules/StreamModule/stream-routing.module';
+
+import { SpinnerService } from './services/spinner.service';
+
 
 @NgModule({
   declarations: [
@@ -12,9 +17,11 @@ import { AuthRoutingModule } from './customModules/auth-routing.module';
   imports: [
     BrowserModule,
     AuthModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    StreamModule,
+    StreamRoutingModule
   ],
-  providers: [],
+  providers: [SpinnerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

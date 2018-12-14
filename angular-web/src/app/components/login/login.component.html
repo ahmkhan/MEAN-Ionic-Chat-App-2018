@@ -1,19 +1,24 @@
 <div class="login-container">
 
-  <h2>LOGIN</h2>
+  <h2>Sign In</h2>
 
-    <mat-form-field>
-        <input matInput placeholder="Enter your User Name" [formControl]="username" required>
+  <form [formGroup]="signInForm" novalidate (ngSubmit)="signInBtn()">
+
+      <mat-form-field>
+          <input matInput placeholder="Enter your User Name" formControlName="UserName" class="form-control" required>
+          <mat-error *ngIf="!signInForm.controls['UserName'].valid && signInForm.controls['UserName'].touched">User Name is required!!!</mat-error>
       </mat-form-field>
 
       <br>
-  
-  <mat-form-field>
-    <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" [formControl]="password" required>
-      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-  </mat-form-field>
+      <br>
+    
+    <mat-form-field>
+      <input matInput type="password" placeholder="Enter your password" formControlName="Password" class="form-control" autocomplete="new-password" required>
+      <mat-error *ngIf="!signInForm.controls['Password'].valid && signInForm.controls['Password'].touched">Password is required!!!</mat-error>
+    </mat-form-field>
 
-  <br>
+      <br>
 
-  <button mat-stroked-button class="loginBtn" (click)="loginBtn()">Login</button>
+    <button type="submit" mat-stroked-button class="signInBtn" [disabled]="!signInForm.valid">Sign In</button>
+  </form>
 </div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SpinnerService } from './services/spinner.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-web';
+  showSpinner: boolean = false;
+
+  constructor (private spinnerService: SpinnerService) { }
+
+  ngOnInit() {
+    this.spinnerService.status.subscribe((val: boolean) => {
+        this.showSpinner = val;
+    });
+}
 }

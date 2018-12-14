@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
+import { Router } from '@angular/router';
 
 import {AuthService} from '../../services/auth.service';
+import {SpinnerService} from '../../services/spinner.service';
 
 @Component({
   selector: 'app-signup',
@@ -12,7 +14,7 @@ import {AuthService} from '../../services/auth.service';
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, private popupMsg: MatSnackBar) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private popupMsg: MatSnackBar, private router: Router, private spinnerService: SpinnerService) { }
 
   ngOnInit() {
     this.createSignUpForm();
@@ -30,26 +32,40 @@ export class SignupComponent implements OnInit {
   signUpBtn() {
     let snackBarConfig = new MatSnackBarConfig();
     snackBarConfig.panelClass = ['custom-class'];
-    snackBarConfig.duration = 3000;
+    snackBarConfig.duration = 2000;
     snackBarConfig.verticalPosition = 'top';
 
+    this.spinnerService.showSpinner(true);
+
     this.authService.registerNewUserService('/registerNewUser', this.signupForm.value).subscribe((userData) => {
-      console.log('userData', userData);
       if (userData.message == 'User Successfully Saved in DB') {
         this.popupMsg.open(userData.message, '', snackBarConfig);
+        setTimeout(() => {
+          this.spinnerService.showSpinner(false);
+          this.router.navigate(['streams']);
+        }, 3000);
       }
     }, (signupError) => {
       console.log('signUpError', signupError.error.message);
       if (signupError && signupError.error && signupError.error.errorMsg) {
         this.popupMsg.open(signupError.error.errorMsg[0].message, '', snackBarConfig);
+        setTimeout(() => {
+          this.spinnerService.showSpinner(false);
+        }, 3000);
       }
 
       if (signupError.error.message == 'This User Name Already Exists in DB') {
         this.popupMsg.open(signupError.error.message, '', snackBarConfig);
+        setTimeout(() => {
+          this.spinnerService.showSpinner(false);
+        }, 3000);
       }
       
       if (signupError.error.message == 'This Email Address Already Exists in DB') {
         this.popupMsg.open(signupError.error.message, '', snackBarConfig);
+        setTimeout(() => {
+          this.spinnerService.showSpinner(false);
+        }, 3000);
       }
     }); 
   };

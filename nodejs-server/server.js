@@ -10,7 +10,7 @@ const app = express();
 
 const dbConfig = require('./config/secret');
 mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.url, { useNewUrlParser: true });
+mongoose.connect(dbConfig.mLabUrl, { useNewUrlParser: true });
 
 app.use(cookieParser());
 // app.use(logger('dev'));

@@ -48,7 +48,7 @@ module.exports.registerNewUser = async (req, res) => {
         };
 
         UserSchema.create(UserDataToSave).then((UserSave) => {
-            let token = JWT.sign({userData: UserDataToSave}, Config.secretKey, {expiresIn: 120});
+            let token = JWT.sign({userData: UserDataToSave}, Config.secretKey, {expiresIn: "1h"});
             if (token) {
                 res.cookie('auth', token);
                 res.status(HttpStatus.CREATED).json({message:'User Successfully Saved in DB', userData: UserSave, token: token});
@@ -56,5 +56,32 @@ module.exports.registerNewUser = async (req, res) => {
         }).catch((UserSaveError) => {
             res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message:'Error in User Saving in DB', userData: UserSaveError});
         }) 
+    });
+};
+
+
+module.exports.loginUser = async (req, res) => {
+    let loginUserDataObj = req.body;
+
+    if (!loginUserDataObj.UserName || !loginUserDataObj.Password) {
+        return res.status(HttpStatus.NOT_FOUND).json({message:'Login Form Details are Incomplete'});
+    }
+
+    UserSchema.findOne({UserName: HelperFunctions.FirstLetterUpperCase(loginUserDataObj.UserName)}).then(loginUserFound => {
+        if (!loginUserFound) {
+            return res.status(HttpStatus.NOT_FOUND).json({message:'Username not exists in DB'});
+        }
+        return PasswordEncrypt.compare(loginUserDataObj.Password, loginUserFound.Password).then(passwordCompare => {
+            if (!passwordCompare) {
+                return res.status(HttpStatus.CONFLICT).json({message:'Password Not Match'});
+            }
+
+            let token = JWT.sign({data: loginUserFound}, Config.secretKey, {expiresIn: "1h"});
+            res.cookie('auth', token);
+            return res.status(HttpStatus.OK).json({message:'User Sign In Successful', userData: loginUserFound, token: token});
+        });
+    })
+    .catch(err => {
+        return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message:'Error Occured during User Login'});
     });
 };

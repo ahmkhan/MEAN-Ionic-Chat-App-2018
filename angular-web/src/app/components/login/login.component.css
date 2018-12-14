@@ -16,8 +16,25 @@
     padding: 10px 0 10px 0
 }
 
-.login-container > .loginBtn {
+.login-container > form > mat-form-field {
+    width: 100%;
+}
+
+.login-container > form > .signInBtn {
     background-color: #7b1fa2;
     width: 20%;
     border-color: #7b1fa2;
+    float: right;
 }
+
+::ng-deep snack-bar-container.custom-class {
+    background-color:tomato;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    justify-content: center;
+  }
+
+  ::ng-deep snack-bar-container .mat-simple-snackbar {
+    justify-content: center;
+  }

@@ -40,11 +40,11 @@ import {
 import {MatTableModule} from '@angular/material/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
-import { AuthTabsComponent } from '../components/auth-tabs/auth-tabs.component';
-import { LoginComponent } from '../components/login/login.component';
-import { SignupComponent } from '../components/signup/signup.component';
+import { AuthTabsComponent } from '../../components/auth-tabs/auth-tabs.component';
+import { LoginComponent } from '../../components/login/login.component';
+import { SignupComponent } from '../../components/signup/signup.component';
 
 @NgModule({
   imports: [

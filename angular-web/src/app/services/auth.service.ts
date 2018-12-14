@@ -13,4 +13,8 @@ export class AuthService {
   registerNewUserService (url, userObj): Observable<any> {
     return this.http.post(`${this.BASEURL + url}`, userObj)
   };
+  
+  loginUserService (url, userObj): Observable<any> {
+    return this.http.post(`${this.BASEURL + url}`, userObj)
+  };
 }
