@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 import {AuthService} from '../../services/auth.service';
 import {SpinnerService} from '../../services/spinner.service';
+import {TokenService} from '../../services/token.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,7 +15,7 @@ import {SpinnerService} from '../../services/spinner.service';
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, private popupMsg: MatSnackBar, private router: Router, private spinnerService: SpinnerService) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private popupMsg: MatSnackBar, private router: Router, private spinnerService: SpinnerService, private tokenService: TokenService) { }
 
   ngOnInit() {
     this.createSignUpForm();
@@ -41,6 +42,7 @@ export class SignupComponent implements OnInit {
       if (userData.message == 'User Successfully Saved in DB') {
         this.popupMsg.open(userData.message, '', snackBarConfig);
         setTimeout(() => {
+          this.tokenService.setToken(userData.token);
           this.spinnerService.showSpinner(false);
           this.router.navigate(['streams']);
         }, 3000);

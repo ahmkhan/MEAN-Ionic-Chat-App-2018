@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 import {AuthService} from '../../services/auth.service';
 import {SpinnerService} from '../../services/spinner.service';
+import {TokenService} from '../../services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ import {SpinnerService} from '../../services/spinner.service';
 export class LoginComponent implements OnInit {
   signInForm: FormGroup;
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, private popupMsg: MatSnackBar, private router: Router, private spinnerService: SpinnerService) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private popupMsg: MatSnackBar, private router: Router, private spinnerService: SpinnerService, private tokenService: TokenService) { }
 
   ngOnInit() {
     this.createSignInForm();
@@ -39,6 +40,7 @@ export class LoginComponent implements OnInit {
       if (loginUserData.message === "User Sign In Successful") {
         this.popupMsg.open(loginUserData.message, '', snackBarConfig);
         setTimeout(() => {
+          this.tokenService.setToken(loginUserData.token);
           this.spinnerService.showSpinner(false);
           this.router.navigate(['streams']);
         }, 3000);

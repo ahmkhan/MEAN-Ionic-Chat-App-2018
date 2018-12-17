@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
 import { AuthModule } from './customModules/AuthModule/auth.module';
@@ -21,7 +22,7 @@ import { SpinnerService } from './services/spinner.service';
     StreamModule,
     StreamRoutingModule
   ],
-  providers: [SpinnerService],
+  providers: [SpinnerService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
