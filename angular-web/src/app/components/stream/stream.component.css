@@ -1,0 +1,10 @@
+.side-component-div {
+    float: left;
+    width: 30%;
+}
+
+.post-component-div {
+    display: inline-block;
+    width: 40%;
+    margin: 90px 0 0 0;
+}

@@ -9,6 +9,8 @@ import { StreamModule } from './customModules/StreamModule/stream.module';
 import { StreamRoutingModule } from './customModules/StreamModule/stream-routing.module';
 
 import { SpinnerService } from './services/spinner.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenHttpInterceptor } from './services/token-http-interceptor';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { SpinnerService } from './services/spinner.service';
     StreamModule,
     StreamRoutingModule
   ],
-  providers: [SpinnerService, CookieService],
+  providers: [SpinnerService, CookieService, 
+    {provide: HTTP_INTERCEPTORS, useClass: TokenHttpInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const port = 4000;
 const authRoutes = require('./routes/authRoutes');
+const postRoutes = require('./routes/postRoutes');
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/chatapp', authRoutes);
+app.use('/api/chatapp', postRoutes);
 
 app.listen(port, () => {
     console.log('Server is Running on ' + port);

@@ -1,0 +1,24 @@
+<mat-card class="post-card">
+  <mat-card-content>
+    <form [formGroup]="postForm" novalidate (ngSubmit)="addPost()">
+        <mat-form-field class="postFormField">
+            <input type="text" matInput placeholder="Post Here" formControlName="Post" class="form-control postInput" required>
+          </mat-form-field>
+      
+          <div class="file-upload">
+              <div class="file-select">
+                <div class="file-select-button" id="fileName">
+                    <i class="material-icons imgIcon">image</i>
+                  Choose Image</div>
+                <div class="file-select-name" id="noFile">{{imageName ? imageName : "No Image chosen..."}}</div> 
+                <input type="file" name="chooseFile" id="chooseFile" (change)="onFileSelected($event)">
+              </div>
+                  <button mat-raised-button class="postBtn" [disabled]="!postForm.valid">
+                      <i class="fab fa-usps postBtnIcon"></i>
+                    Post
+                  </button>
+            </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+

@@ -78,6 +78,7 @@ module.exports.loginUser = async (req, res) => {
 
             let token = JWT.sign({data: loginUserFound}, Config.secretKey, {expiresIn: "1h"});
             res.cookie('auth', token);
+            res.cookie('user', loginUserFound);
             return res.status(HttpStatus.OK).json({message:'User Sign In Successful', userData: loginUserFound, token: token});
         });
     })
