@@ -8,10 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit {
+  userName: any;
 
   constructor(private tokenService: TokenService, private router: Router) { }
 
   ngOnInit() {
+    this.userName = this.tokenService.getPayload()
   }
 
   logoutBtn() {

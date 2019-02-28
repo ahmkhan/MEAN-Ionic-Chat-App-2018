@@ -14,6 +14,7 @@ export class StreamComponent implements OnInit {
   constructor(private tokenService: TokenService, private router: Router) { }
 
   ngOnInit() {
-    this.token = this.tokenService.getToken();
+    this.token = this.tokenService.getPayload();
+    console.log('this.token', this.token);
   }
 }
