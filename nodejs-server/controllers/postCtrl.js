@@ -38,3 +38,18 @@ module.exports.AddPost = (req, res) => {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message:'Server Error on Post Creation', postError: error});
     });
 };
+
+
+module.exports.GetAllPost = async (req, res) => {
+    try {
+        console.log('here')
+        const posts = await PostSchema.find({})
+        .populate('Users')
+        .sort({CreatedAt: -1}); 
+
+        res.status(HttpStatus.OK).json({message:'User Posts Found Successfully', userPosts: posts});
+    }
+    catch(err) {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message:'User Posts Found Error', err: err});
+    }
+}

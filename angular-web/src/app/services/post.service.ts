@@ -12,5 +12,9 @@ export class PostService {
 
   addPost(postData) :Observable<any> {
     return this.http.post(`${this.BASEURL}/post/add-post`, postData)
-  }
+  };
+
+  getUserPosts() :Observable<any> {
+    return this.http.get(`${this.BASEURL}/post/get-all-posts`)
+  };
 }
