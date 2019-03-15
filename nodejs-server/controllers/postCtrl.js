@@ -42,7 +42,6 @@ module.exports.AddPost = (req, res) => {
 
 module.exports.GetAllPost = async (req, res) => {
     try {
-        console.log('here')
         const posts = await PostSchema.find({})
         .populate('Users')
         .sort({CreatedAt: -1}); 

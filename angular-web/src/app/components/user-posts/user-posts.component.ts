@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PostService} from '../../services/post.service';
 import * as moment from 'moment';
+import io from 'socket.io-client';
 
 @Component({
   selector: 'app-user-posts',
@@ -9,11 +10,17 @@ import * as moment from 'moment';
 })
 export class UserPostsComponent implements OnInit {
   userPostsArray: any;
+  socketIO: any;
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService) {
+    this.socketIO = io('http://localhost:4000');
+   }
 
   ngOnInit() {
-    this.userAllPosts();  
+    this.userAllPosts();
+    this.socketIO.on('refreshPage', data => {
+      this.userAllPosts();
+    });  
   }
 
   userAllPosts() {

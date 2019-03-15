@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 
+import io from 'socket.io-client';
+
 import { PostService } from 'src/app/services/post.service';
 import {SpinnerService} from '../../services/spinner.service';
 
@@ -13,8 +15,11 @@ import {SpinnerService} from '../../services/spinner.service';
 export class PostFormsComponent implements OnInit {
   imageName: any = null;
   postForm: FormGroup;
+  socketIO: any;
 
-  constructor(private formBuilder: FormBuilder, private postService: PostService, private popupMsg: MatSnackBar, private spinnerService: SpinnerService) { }
+  constructor(private formBuilder: FormBuilder, private postService: PostService, private popupMsg: MatSnackBar, private spinnerService: SpinnerService) {
+    this.socketIO = io('http://localhost:4000');
+  }
 
   ngOnInit() {
     this.createPostForm();
@@ -47,6 +52,8 @@ export class PostFormsComponent implements OnInit {
           this.spinnerService.showSpinner(false);
           this.postForm.reset();
         }, 2000);
+
+        this.socketIO.emit('refresh', {});
       }
       
     }, (errorPost) => {

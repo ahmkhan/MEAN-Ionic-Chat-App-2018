@@ -9,6 +9,11 @@ const postRoutes = require('./routes/postRoutes');
 
 const app = express();
 
+//Socket.IO
+const server = require('http').createServer(app);
+const socketIO =  require('socket.io').listen(server);
+//Socket.IO
+
 const dbConfig = require('./config/secret');
 mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.mLabUrl, { useNewUrlParser: true });
@@ -29,9 +34,11 @@ app.use((req, res, next) => {
     next();
 });
 
+require('./socket/streams')(socketIO);
+
 app.use('/api/chatapp', authRoutes);
 app.use('/api/chatapp', postRoutes);
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log('Server is Running on ' + port);
 });
