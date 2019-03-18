@@ -51,4 +51,23 @@ module.exports.GetAllPost = async (req, res) => {
     catch(err) {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message:'User Posts Found Error', err: err});
     }
-}
+};
+
+
+module.exports.LikePost = async (req, res) => {
+    const postId = req.body._id;
+
+    await PostSchema.update({
+        _id: postId,
+        'Likes.UserName': {$ne: req.user.UserName}
+    }, {
+        $push: {
+            Likes: {UserName: req.user.UserName}
+        },
+        $inc: {TotalLikes: 1}
+    }).then((likeStatus) => {
+        res.status(HttpStatus.OK).json({status: true, message:'User Like Post Successfully'});
+    }).catch(err => {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({status: false, message:'User Like Post Error'});
+    });
+};

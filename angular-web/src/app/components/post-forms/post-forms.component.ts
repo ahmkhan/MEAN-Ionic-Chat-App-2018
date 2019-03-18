@@ -51,9 +51,8 @@ export class PostFormsComponent implements OnInit {
         setTimeout(() => {
           this.spinnerService.showSpinner(false);
           this.postForm.reset();
+          this.socketIO.emit('refresh', {});
         }, 2000);
-
-        this.socketIO.emit('refresh', {});
       }
       
     }, (errorPost) => {

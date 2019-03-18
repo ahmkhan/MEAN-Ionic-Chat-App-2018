@@ -99,7 +99,7 @@
 .file-upload .file-select input[type=file]{
     z-index:100;
     cursor:pointer;
-    position:absolute;
+    position:relative;
     height:100%;
     width:100%;
     top:0;
@@ -113,7 +113,6 @@
 }
 
 .file-upload .file-select.file-select-disabled:hover{
-    cursor:default;
     display:block;
     border: 2px solid tomato;
     color: tomato;
@@ -175,4 +174,3 @@
   ::ng-deep snack-bar-container .mat-simple-snackbar {
     justify-content: center;
   }
-  

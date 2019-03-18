@@ -11,10 +11,14 @@ export class PostService {
   constructor(private http: HttpClient) { }
 
   addPost(postData) :Observable<any> {
-    return this.http.post(`${this.BASEURL}/post/add-post`, postData)
+    return this.http.post(`${this.BASEURL}/post/add-post`, postData);
   };
 
   getUserPosts() :Observable<any> {
-    return this.http.get(`${this.BASEURL}/post/get-all-posts`)
+    return this.http.get(`${this.BASEURL}/post/get-all-posts`);
+  };
+
+  likePost(post) :Observable<any> {
+    return this.http.post(`${this.BASEURL}/post/like-post`, post);
   };
 }
