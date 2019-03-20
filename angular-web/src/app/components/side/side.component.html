@@ -26,11 +26,13 @@
         <mat-list class="myList">
             <!-- <h4 mat-subheader>First Names</h4> -->
 
-            <mat-list-item>
-                <div mat-line>
+            <mat-list-item [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                <a [routerLink]="['/streams']" class="anchor-sidebar">
+                  <div mat-line>
                     <p class="listItemName">Streams</p>
                     <button mat-button class="sendBtn"><i class="material-icons for-font-class">announcement</i></button>
-                </div>
+                  </div>
+                </a>
             </mat-list-item>
 
             <mat-list-item>

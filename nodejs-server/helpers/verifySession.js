@@ -16,7 +16,7 @@ module.exports.verifySession = (req, res, next) => {
     return jwt.verify(token, dbConfig.secretKey, (err, decoded) => {
         if (err) {
             if (err.expiredAt < new Date()) {
-                return res.status(httpStatus.GATEWAY_TIMEOUT).json({message: 'Session Expired, Please Login Again'});
+                return res.status(httpStatus.GATEWAY_TIMEOUT).json({message: 'Session Expired, Please Login Again', token: null});
             }
             next();
         }

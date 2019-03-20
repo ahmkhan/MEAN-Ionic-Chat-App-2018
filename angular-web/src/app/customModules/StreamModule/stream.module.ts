@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import {
   MatCheckboxModule,
   MatButtonModule,
@@ -85,7 +86,8 @@ import { CommentsComponent } from '../../components/comments/comments.component'
     MatTabsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   declarations: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent],
   exports: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent],

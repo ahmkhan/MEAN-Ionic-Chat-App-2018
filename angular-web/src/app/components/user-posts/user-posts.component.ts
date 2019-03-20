@@ -36,7 +36,11 @@ export class UserPostsComponent implements OnInit {
         this.userPostsArray = posts.userPosts;
       }
       else {
-        console.log(' No User Posts Found');
+        console.log('No User Posts Found');
+      }
+    }, (err) => {
+      if (err.error && err.error.token == null) {
+        this.router.navigate(['']);
       }
     });
   };
