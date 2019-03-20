@@ -1,3 +1,10 @@
+.toolbar-heading {
+  cursor: pointer;
+  color: #7b1fa2;
+  font-weight: bold;
+  font-size: 26px;
+}
+
 .spacer {
     flex: 1 1 auto;
 }
@@ -17,7 +24,7 @@
     height: 200px;
     text-align: center;
     padding: 20px 0 0 0;
-    display: inline-block !important;
+    display: inline-block;
 }
 
 .imageCircle {

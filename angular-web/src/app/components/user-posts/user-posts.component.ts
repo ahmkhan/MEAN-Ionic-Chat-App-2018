@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {PostService} from '../../services/post.service';
 import {TokenService} from '../../services/token.service';
 import * as moment from 'moment';
@@ -16,7 +17,7 @@ export class UserPostsComponent implements OnInit {
   socketIO: any;
   userDetails: any;
 
-  constructor(private postService: PostService, private tokenService: TokenService) {
+  constructor(private postService: PostService, private tokenService: TokenService, private router: Router) {
     this.socketIO = io('http://localhost:4000');
    }
 
@@ -56,6 +57,10 @@ export class UserPostsComponent implements OnInit {
 
   timeFromNowConvert(time: any) {
     return moment(time).fromNow();
+  };
+
+  openCommentsPage(posts) {
+    this.router.navigate(['comments/' + posts._id]);
   };
 
 }

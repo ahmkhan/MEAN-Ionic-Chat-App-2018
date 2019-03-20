@@ -1,0 +1,58 @@
+<app-toolbar></app-toolbar>
+
+<div class='side-component-div'>
+  <app-side></app-side>
+</div>
+
+<div class="view-post-div">
+  <mat-card>
+    <mat-card-content>
+      <p class="user-post-content">
+        {{userPost}}
+      </p>
+
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class='comment-component-div'>
+  <mat-card class="comment-card">
+    <mat-card-content>
+
+      <form [formGroup]="commentForm" novalidate (ngSubmit)="addComment()">
+        <mat-form-field class="commentFormField">
+          <input type="text" matInput placeholder="Post Here" formControlName="Comment" class="form-control commentInput" required>
+        </mat-form-field>
+
+          <button mat-raised-button class="commentBtn" [disabled]="!commentForm.valid">
+            <i class="fas fa-comment-dots commentBtnIcon"></i>
+            Comment
+          </button>
+      </form>
+
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+<div class="show-posts-div">
+  <mat-card class="matCard-comment" *ngFor="let comment of commentsArray">
+    <mat-list>
+
+      <mat-list-item>
+        <img mat-list-avatar src="http://placehold.it/50x50" alt="User Comment">
+        <h3 mat-line class="username-heading">{{comment.FullName}}</h3>
+        <p mat-line class="date-heading">{{timeFromNowConvert(comment.CreatedAt)}}</p>
+
+      </mat-list-item>
+    </mat-list>
+
+    <mat-card-content>
+      <p class="user-comment-content">
+        {{comment.Comment}}
+      </p>
+
+    </mat-card-content>
+  </mat-card>
+
+</div>

@@ -45,6 +45,7 @@ import { ToolbarComponent } from '../../components/toolbar/toolbar.component';
 import { SideComponent } from '../../components/side/side.component';
 import { PostFormsComponent } from '../../components/post-forms/post-forms.component';
 import { UserPostsComponent } from '../../components/user-posts/user-posts.component';
+import { CommentsComponent } from '../../components/comments/comments.component';
 
 
 @NgModule({
@@ -86,7 +87,7 @@ import { UserPostsComponent } from '../../components/user-posts/user-posts.compo
     ReactiveFormsModule,
     HttpClientModule
   ],
-  declarations: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent],
+  declarations: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent],
   exports: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent],
   providers: [TokenService, PostService]
 })

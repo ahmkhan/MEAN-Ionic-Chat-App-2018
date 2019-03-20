@@ -4,9 +4,11 @@ import {Routes, RouterModule} from '@angular/router';
 import { AuthGuard } from '../../services/auth.guard';
 
 import { StreamComponent } from '../../components/stream/stream.component';
+import { CommentsComponent } from '../../components/comments/comments.component';
 
 const streamRoutes: Routes = [
-  {path: 'streams', component: StreamComponent, canActivate: [AuthGuard]}
+  {path: 'streams', component: StreamComponent, canActivate: [AuthGuard]},
+  {path: 'comments/:id', component: CommentsComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

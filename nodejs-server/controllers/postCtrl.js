@@ -71,3 +71,41 @@ module.exports.LikePost = async (req, res) => {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({status: false, message:'User Like Post Error'});
     });
 };
+
+
+module.exports.AddComment = async (req, res) => {
+    const postId = req.body.PostId;
+    const comment = req.body.Comment;
+
+    await PostSchema.update({
+        _id: postId
+    }, {
+        $push: {
+            Comments: {
+                UserId: req.user._id,
+                FullName: req.user.FullName,
+                UserName: req.user.UserName,
+                Comment: comment,
+                CreatedAt: new Date()
+            }
+        }
+    }).then((commentStatus) => {
+        res.status(HttpStatus.OK).json({status: true, message:'User Comment Successfully'});
+    }).catch(err => {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({status: false, message:'User Comment Error'});
+    });
+};
+
+
+module.exports.GetSinglePost = async (req, res) => {
+    await PostSchema.findOne({
+        _id: req.params.id
+    })
+        .populate('user')
+        .populate('Comments.UserId')
+        .then((foundPost) => {
+            res.status(HttpStatus.OK).json({status: true, message:'Post Found Successfully', post: foundPost});
+        }).catch(err => {
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({status: false, message:'Post Not Found'});
+        });
+};

@@ -1,0 +1,106 @@
+.side-component-div {
+  float: left;
+  width: 30%;
+}
+
+.view-post-div {
+  float: left;
+  width: 40%;
+  margin: 22px 0 0 0;
+}
+
+.user-post-content {
+  color: tomato;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  padding: 0 0 2px 0 !important;
+}
+
+.comment-component-div {
+  display: inline-block;
+  width: 40%;
+  margin: 20px 0 0 0;
+}
+
+.comment-card {
+  border: 20px solid #7b1fa2;
+}
+
+.commentFormField {
+  width: 100%;
+}
+
+.commentInput {
+  color: #7b1fa2;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.commentInput:hover {
+  color: tomato;
+}
+
+.commentBtnIcon {
+  float: left;
+  font-size: 25px;
+  margin: 10px 0 0 -11px;
+}
+
+.commentBtn {
+  background: #7b1fa2;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
+  width: 30%;
+  line-height: 45px;
+  margin: 10px 0 0 0;
+}
+
+.commentBtn:hover {
+  background: tomato;
+  color: white;
+}
+
+
+::ng-deep snack-bar-container.custom-class {
+  background-color:tomato;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  justify-content: center;
+}
+
+::ng-deep snack-bar-container .mat-simple-snackbar {
+  justify-content: center;
+}
+
+.show-posts-div {
+  float: left;
+  width: 40%;
+  margin: 15px 0 0 0;
+}
+
+.matCard-comment {
+  margin: 0 0 10px 0;
+}
+
+.username-heading {
+  color: #7b1fa2;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  padding: 0 0 2px 0 !important;
+}
+
+.date-heading {
+  color: darkgray;
+  font-size: 14px !important;
+  padding: 0 0 2px 0 !important;
+}
+
+.user-comment-content {
+  margin: 5px 0 20px 20px;
+  color: #7b1fa2;
+  font-size: 14px;
+  font-weight: bold;
+}
