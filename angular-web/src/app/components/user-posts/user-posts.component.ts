@@ -40,6 +40,7 @@ export class UserPostsComponent implements OnInit {
       }
     }, (err) => {
       if (err.error && err.error.token == null) {
+        this.tokenService.deleteToken();
         this.router.navigate(['']);
       }
     });
