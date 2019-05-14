@@ -6,6 +6,8 @@ const cors = require('cors');
 const port = 4000;
 const authRoutes = require('./routes/authRoutes');
 const postRoutes = require('./routes/postRoutes');
+const peopleRoutes = require('./routes/peopleRoutes');
+const followRoutes = require('./routes/followRoutes');
 
 const app = express();
 
@@ -38,6 +40,8 @@ require('./socket/streams')(socketIO);
 
 app.use('/api/chatapp', authRoutes);
 app.use('/api/chatapp', postRoutes);
+app.use('/api/chatapp', peopleRoutes);
+app.use('/api/chatapp', followRoutes);
 
 server.listen(port, () => {
     console.log('Server is Running on ' + port);

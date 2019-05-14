@@ -1,0 +1,30 @@
+<app-toolbar></app-toolbar>
+
+<div class='main-component-div'>
+
+  <div class='side-component-div'>
+    <app-side></app-side>
+  </div>
+
+  <div class='post-component-div'>
+    <div class="user-profile-div">
+     
+      <mat-card class="people-card" *ngFor='let people of allPeoplesArray'>
+        <mat-card-header>
+          <img class="user-profile-image" src="http://placehold.it/250x250" alt="Photo of a User">
+        </mat-card-header>
+        <mat-card-content>
+          <p class="username-para"> 
+            {{people.FullName}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions class="people-btn-section">
+          <button mat-raised-button class="follow-btn">FOLLOW</button>
+          <button mat-button><i class="material-icons for-font-class">chat</i></button>
+        </mat-card-actions>
+      </mat-card>
+    
+    </div>
+  </div>
+
+</div>

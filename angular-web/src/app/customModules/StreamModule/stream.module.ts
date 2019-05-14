@@ -47,6 +47,8 @@ import { SideComponent } from '../../components/side/side.component';
 import { PostFormsComponent } from '../../components/post-forms/post-forms.component';
 import { UserPostsComponent } from '../../components/user-posts/user-posts.component';
 import { CommentsComponent } from '../../components/comments/comments.component';
+import { PeopleComponent } from '../../components/people/people.component';
+import { PeopleService } from 'src/app/services/people.service';
 
 
 @NgModule({
@@ -89,8 +91,8 @@ import { CommentsComponent } from '../../components/comments/comments.component'
     HttpClientModule,
     RouterModule
   ],
-  declarations: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent],
-  exports: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent],
-  providers: [TokenService, PostService]
+  declarations: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent, PeopleComponent],
+  exports: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent, PeopleComponent],
+  providers: [TokenService, PostService, PeopleService]
 })
 export class StreamModule { }
