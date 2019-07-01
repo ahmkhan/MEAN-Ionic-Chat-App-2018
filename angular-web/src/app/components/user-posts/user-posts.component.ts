@@ -34,8 +34,7 @@ export class UserPostsComponent implements OnInit {
     this.postService.getUserPosts().subscribe((posts: any) => {
       if (posts.userPosts && posts.userPosts.length) {
         this.userPostsArray = posts.userPosts;
-      }
-      else {
+      } else {
         console.log('No User Posts Found');
       }
     }, (err) => {
@@ -44,7 +43,7 @@ export class UserPostsComponent implements OnInit {
         this.router.navigate(['']);
       }
     });
-  };
+  }
 
   likePost(post, event) {
     this.postService.likePost(post).subscribe((like: any) => {
@@ -54,18 +53,18 @@ export class UserPostsComponent implements OnInit {
     }, (err) => {
       console.log('err', err);
     });
-  };
+  }
 
   checkUserExistsInLikeArray(arr, user) {
     return _.some(arr, {UserName: user});
-  };
+  }
 
   timeFromNowConvert(time: any) {
     return moment(time).fromNow();
-  };
+  }
 
   openCommentsPage(posts) {
     this.router.navigate(['comments/' + posts._id]);
-  };
+  }
 
 }

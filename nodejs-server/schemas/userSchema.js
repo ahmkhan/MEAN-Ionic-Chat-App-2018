@@ -9,11 +9,11 @@ const userSchema = mongoose.Schema({
         Post: {type: String},
         CreatedAt: {type: Date, default: Date.now()}
     }],
-    UserFollowed: [
+    UserFollowing: [
         {UserFollowed: {type: mongoose.Schema.Types.ObjectId, ref:'Users'}}
     ],
     UserFollowers: [
-        {UserFollowers: {type: mongoose.Schema.Types.ObjectId, ref:'Users'}}
+        {UserFollower: {type: mongoose.Schema.Types.ObjectId, ref:'Users'}}
     ]
 });
 

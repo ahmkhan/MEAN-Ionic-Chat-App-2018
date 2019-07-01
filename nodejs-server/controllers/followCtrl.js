@@ -4,14 +4,36 @@ const PostSchema            = require('../schemas/postModels');
 const UserSchema            = require('../schemas/userSchema');
 
 
-module.exports.FollowUser = async (req, res) => {
-    // try {
-    //     const allPeoples = await UserSchema.find({}).populate('Posts.PostId')
+module.exports.FollowUser = (req, res) => {
+    const followUserAsyncMethod = async () => {
 
-    //     res.status(HttpStatus.OK).json({message:'All Users Found Successfully', Users: allPeoples});
-    // }
-    // catch (err) {
-    //     res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message:'All Users Found Error', err: err});
-    // }
-    console.log('here')
+        await UserSchema.update({
+            _id: req.user._id,
+            "UserFollowing.UserFollowed": {$ne: req.body.userFollowedId}
+        }, {
+            $push: {
+                UserFollowing: {
+                    UserFollowed: req.body.userFollowedId
+                }
+            }
+        });
+
+        await UserSchema.update({
+            _id: req.body.userFollowedId,
+            "UserFollowers.UserFollower": {$ne: req.user._id}
+        }, {
+            $push: {
+                UserFollowers: {
+                    UserFollower: req.user._id
+                }
+            }
+        });
+    };
+
+    followUserAsyncMethod().then(() => {
+        res.status(HttpStatus.OK).json({status: true, message:'User following Successfully'});
+    })
+        .catch((err) => {
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({status: false, message:'Error occurred on User following'});
+        });
 };

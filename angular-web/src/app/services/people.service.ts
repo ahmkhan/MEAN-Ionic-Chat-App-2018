@@ -20,5 +20,18 @@ export class PeopleService {
     return await this.http.get(`${this.BASEURL}/people/getAllUsers`);
   };
 
+  async getPeoples_UsersById(id: any) {
+    return await this.http.get(`${this.BASEURL}/people/${id}`);
+  };
+
+  async getPeoples_UsersByUserName(userNme: any) {
+    return await this.http.get(`${this.BASEURL}/people/${userNme}`);
+  };
+
+
+  followUserMethod(userFollowId: any) {
+    return this.http.post(`${this.BASEURL}/people/followUser`, {userFollowedId: userFollowId})
+  };
+
 
 }

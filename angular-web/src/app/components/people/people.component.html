@@ -19,7 +19,8 @@
           </p>
         </mat-card-content>
         <mat-card-actions class="people-btn-section">
-          <button mat-raised-button class="follow-btn">FOLLOW</button>
+          <button type="button" mat-raised-button class="follow-btn" (click)="followUserBtn(people)" *ngIf="!checkUserInArray(usersArr, people._id)">FOLLOW</button>
+          <button type="button" mat-raised-button disabled class="follow-btn" *ngIf="checkUserInArray(usersArr, people._id)">FOLLOWING</button>
           <button mat-button><i class="material-icons for-font-class">chat</i></button>
         </mat-card-actions>
       </mat-card>
