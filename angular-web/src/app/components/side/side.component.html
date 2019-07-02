@@ -44,12 +44,14 @@
               </a>
                 </mat-list-item>
 
-                <mat-list-item>
-                        <div mat-line>
-                            <p class="listItemName">Following</p>
-                            <button mat-button class="sendBtn"><i class="material-icons for-font-class">people</i></button>
-                        </div>
-                    </mat-list-item>
+                <mat-list-item [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                  <a [routerLink]="['/people', 'following']" class="anchor-sidebar">
+                    <div mat-line>
+                      <p class="listItemName">Following</p>
+                      <button mat-button class="sendBtn"><i class="material-icons for-font-class">person</i></button>
+                    </div>
+                  </a>
+                </mat-list-item>
 
                     <mat-list-item>
                             <div mat-line>

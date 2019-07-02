@@ -1,0 +1,29 @@
+<app-toolbar></app-toolbar>
+
+<div class='main-component-div'>
+
+  <div class='side-component-div'>
+    <app-side></app-side>
+  </div>
+
+  <div class='post-component-div'>
+    <div class="user-profile-div">
+
+      <mat-card class="people-card" *ngFor='let people of usersArr'>
+        <mat-card-header>
+          <img class="user-profile-image" src="http://placehold.it/250x250" alt="Photo of a User">
+        </mat-card-header>
+        <mat-card-content>
+          <p class="username-para">
+            {{people.UserFollowed.FullName}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions class="people-btn-section">
+          <button type="button" mat-raised-button class="follow-btn" (click)="unFollowUserBtn(people.UserFollowed)">UN-FOLLOW</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </div>
+  </div>
+
+</div>

@@ -34,4 +34,9 @@ export class PeopleService {
   };
 
 
+  unFollowUserMethod(userFollowId: any) {
+    return this.http.post(`${this.BASEURL}/people/unFollowUser`, {userFollowedId: userFollowId})
+  };
+
+
 }

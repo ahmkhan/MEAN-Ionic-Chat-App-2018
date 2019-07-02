@@ -1,0 +1,59 @@
+.side-component-div {
+  float: left;
+  width: 30%;
+}
+
+.post-component-div {
+  display: inline-block;
+  width: 70%;
+  margin: 90px 0 0 0;
+}
+
+.people-card {
+  width: 25%;
+  display: inline-block;
+  margin: 0 10px 0 0;
+}
+
+.people-card img {
+  text-align: center;
+}
+
+.user-profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  /* margin: 0 auto;
+  top: 20px; */
+}
+
+.username-para {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #7b1fa2;
+  margin: 18px 0 0 0;
+}
+
+.people-btn-section {
+  text-align: center;
+}
+
+.follow-btn {
+  background: #7b1fa2;
+  color: white;
+  font-weight: bold;
+}
+
+.people-btn-section .follow-btn:hover {
+  background: tomato;
+}
+
+.for-font-class {
+  color: #7b1fa2;
+  font-size: 45px;
+}
+
+.for-font-class:hover {
+  color: tomato;
+}

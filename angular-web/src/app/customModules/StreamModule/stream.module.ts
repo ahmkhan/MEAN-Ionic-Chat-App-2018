@@ -49,6 +49,7 @@ import { UserPostsComponent } from '../../components/user-posts/user-posts.compo
 import { CommentsComponent } from '../../components/comments/comments.component';
 import { PeopleComponent } from '../../components/people/people.component';
 import { PeopleService } from 'src/app/services/people.service';
+import { FollowingComponent } from '../../components/following/following.component';
 
 
 @NgModule({
@@ -91,7 +92,7 @@ import { PeopleService } from 'src/app/services/people.service';
     HttpClientModule,
     RouterModule
   ],
-  declarations: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent, PeopleComponent],
+  declarations: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent, PeopleComponent, FollowingComponent],
   exports: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent, PeopleComponent],
   providers: [TokenService, PostService, PeopleService]
 })
