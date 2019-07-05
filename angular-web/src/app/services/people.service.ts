@@ -25,17 +25,27 @@ export class PeopleService {
   };
 
   async getPeoples_UsersByUserName(userNme: any) {
-    return await this.http.get(`${this.BASEURL}/people/${userNme}`);
+    return await this.http.get(`${this.BASEURL}/people/userName/${userNme}`);
   };
 
 
   followUserMethod(userFollowId: any) {
-    return this.http.post(`${this.BASEURL}/people/followUser`, {userFollowedId: userFollowId})
+    return this.http.post(`${this.BASEURL}/follow/followUser`, {userFollowedId: userFollowId});
   };
 
 
   unFollowUserMethod(userFollowId: any) {
-    return this.http.post(`${this.BASEURL}/people/unFollowUser`, {userFollowedId: userFollowId})
+    return this.http.post(`${this.BASEURL}/follow/unFollowUser`, {userFollowedId: userFollowId});
+  };
+
+
+  MarkOrDeleteNotification(id: any, deleteValue?) {
+    return this.http.post(`${this.BASEURL}/follow/markOrDeleteNotification/${id}`, {id, deleteValue});
+  };
+
+
+  async MarkAllNotificationsAsRead() {
+    return this.http.post(`${this.BASEURL}/follow/markAllNotificationsAsRead`, {all: true});
   };
 
 

@@ -50,6 +50,8 @@ import { CommentsComponent } from '../../components/comments/comments.component'
 import { PeopleComponent } from '../../components/people/people.component';
 import { PeopleService } from 'src/app/services/people.service';
 import { FollowingComponent } from '../../components/following/following.component';
+import { FollowersComponent } from '../../components/followers/followers.component';
+import { NotificatonsComponent } from '../../components/notificatons/notificatons.component';
 
 
 @NgModule({
@@ -92,7 +94,7 @@ import { FollowingComponent } from '../../components/following/following.compone
     HttpClientModule,
     RouterModule
   ],
-  declarations: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent, PeopleComponent, FollowingComponent],
+  declarations: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent, PeopleComponent, FollowingComponent, FollowersComponent, NotificatonsComponent],
   exports: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent, PeopleComponent],
   providers: [TokenService, PostService, PeopleService]
 })

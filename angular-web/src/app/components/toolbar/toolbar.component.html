@@ -2,6 +2,39 @@
   <mat-toolbar-row>
   <span (click)="goStreamPage()" class="toolbar-heading">My Toolbar</span>
     <span class="spacer"></span>
+
+    <span class="notification-icon">
+      <button class="notification-icon-btn" mat-icon-button aria-label="Notifications Menu" [mat-menu-trigger-for]="menu">
+        <mat-icon class="notificationIcon">notification_important</mat-icon>
+        <span class="notificationNumber" *ngIf="countNotifications.length > 0">{{countNotifications.length}}</span>
+      </button>
+        <mat-menu #menu="matMenu">
+
+          <div *ngIf="hasNotifications">
+            <button mat-menu-item class="mat-menu-btn" *ngFor="let notification of notificationsArr">
+                <img class="image-avatar" src="http://placehold.it/50x50" alt="Desc 1">
+                <p [ngClass]="notification.MsgRead ? 'messageRead' : 'messageUnRead' ">{{notification.Message}}</p>
+                <p class="date-heading">{{timeFromNowConvert(notification.CreatedAt)}}</p>
+            </button>
+            <button class="btn-markAllAsRead" mat-raised-button (click)="markAllAsRead()">Mark all as Read</button>
+          </div>
+
+          <div *ngIf="!hasNotifications">
+            <button mat-menu-item>
+            <mat-list role="list" *ngIf="!hasNotifications">
+            <mat-list-item role="listitem">
+                No Notifications
+            </mat-list-item>
+          </mat-list>
+            </button>
+          </div>
+
+
+
+
+      </mat-menu>
+    </span>
+
     <button mat-button class="logoutBtn" (click)="logoutBtn()"><i class="fas fa-sign-out-alt logoutIcon"></i>Logout</button>
   </mat-toolbar-row>
 

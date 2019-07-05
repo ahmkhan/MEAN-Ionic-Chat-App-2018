@@ -38,10 +38,7 @@ export class UserPostsComponent implements OnInit {
         console.log('No User Posts Found');
       }
     }, (err) => {
-      if (err.error && err.error.token == null) {
-        this.tokenService.deleteToken();
-        this.router.navigate(['']);
-      }
+      console.log('err', err);
     });
   }
 

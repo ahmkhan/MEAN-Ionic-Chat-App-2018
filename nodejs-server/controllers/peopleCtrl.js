@@ -26,10 +26,10 @@ module.exports.GetUserById = async (req, res) => {
             .populate('UserFollowing.UserFollowed')
             .populate('UserFollowers.UserFollower');
 
-        res.status(HttpStatus.OK).json({message:'User by Id Found Successfully', Users: peopleById});
+        res.status(HttpStatus.OK).json({status: true, message:'User by Id Found Successfully', Users: peopleById});
     }
     catch (err) {
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message:'User by Id Found Error', err: err});
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({status: false, message:'User by Id Found Error', err: err});
     }
 };
 
@@ -41,9 +41,9 @@ module.exports.GetUserByUserName = async (req, res) => {
             .populate('UserFollowing.UserFollowed')
             .populate('UserFollowers.UserFollower');
 
-        res.status(HttpStatus.OK).json({message:'User by UserName Found Successfully', Users: PeopleByUserName});
+        res.status(HttpStatus.OK).json({status: true, message:'User by UserName Found Successfully', Users: PeopleByUserName});
     }
     catch (err) {
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({message:'User by UserName Found Error', err: err});
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({status: false, message:'User by UserName Found Error', err: err});
     }
 };

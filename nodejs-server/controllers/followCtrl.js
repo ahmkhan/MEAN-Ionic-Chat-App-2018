@@ -25,6 +25,10 @@ module.exports.FollowUser = (req, res) => {
             $push: {
                 UserFollowers: {
                     UserFollower: req.user._id
+                },
+                Notifications: {
+                    SenderId: req.user._id,
+                    Message:`${req.user.FullName} is now Following you.`            //All other fields have default value in Schema so dont need to add here
                 }
             }
         });
@@ -40,7 +44,6 @@ module.exports.FollowUser = (req, res) => {
 
 
 module.exports.UnFollowUser = (req, res) => {
-    console.log('req.body.userFollowedId', req.body.userFollowedId)
     const unFollowUserAsyncMethod = async () => {
 
         await UserSchema.updateOne({
@@ -60,6 +63,12 @@ module.exports.UnFollowUser = (req, res) => {
                 UserFollowers: {
                     UserFollower: req.user._id
                 }
+            },
+            $push: {
+                Notifications: {
+                    SenderId: req.user._id,
+                    Message:`${req.user.FullName} is now Un-Following you.`            //All other fields have default value in Schema so dont need to add here
+                }
             }
         });
     };
@@ -70,4 +79,69 @@ module.exports.UnFollowUser = (req, res) => {
         .catch((err) => {
             res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({status: false, message:'Error occurred on User Un-Following'});
         });
+};
+
+
+module.exports.MarkOrDeleteNotification = (req, res) => {
+        const MarkNotificationAsReadOrDeleteNotificationMethod = async () => {
+            if (!req.body.deleteValue) {
+                await UserSchema.updateOne({
+                    _id: req.user._id,
+                    "Notifications._id": req.body.id
+                }, {
+                    $set: {
+                        "Notifications.$.MsgRead": true
+                    }
+                });
+            }
+            else {
+                await UserSchema.updateOne({
+                    _id: req.user._id,
+                    "Notifications._id": req.body.id
+                }, {
+                    $pull: {
+                        Notifications: {_id: req.body.id}
+                    }
+                });
+            }
+        };
+
+        MarkNotificationAsReadOrDeleteNotificationMethod().then(() => {
+            if (!req.body.deleteValue) {
+                res.status(HttpStatus.OK).json({status: true, message:'Notification Successfully Mark as Read'});
+            }
+            else {
+                res.status(HttpStatus.OK).json({status: true, message:'Notification Deleted Successfully'});
+            }
+        })
+            .catch((err) => {
+                if (!req.body.deleteValue) {
+                    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({status: false, message:'Error occurred on Notification Mark as Read'});
+                }
+                else {
+                    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({status: false, message:'Error occurred on Notification Deleting'});
+                }
+            });
+};
+
+
+module.exports.markAllNotificationsAsRead = (req, res) => {
+        const markAllNotificationsAsReadMethod = async () => {
+                await UserSchema.update({
+                    _id: req.user._id,
+                }, {
+                    $set: {
+                        "Notifications.$[elem].MsgRead": true
+                    }
+                }, {
+                    arrayFilters: [{'elem.MsgRead' : false}], multi: true
+                });
+        };
+
+    markAllNotificationsAsReadMethod().then(() => {
+                res.status(HttpStatus.OK).json({status: true, message:'All Notifications Successfully Mark as Read'});
+        })
+            .catch((err) => {
+                    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({status: false, message:'Error occurred on ll Notifications Mark as Read'});
+            });
 };

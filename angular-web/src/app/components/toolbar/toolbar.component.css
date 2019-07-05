@@ -42,3 +42,92 @@
 .user-text {
     margin: 0;
 }
+
+.notification-icon {
+  display: inline-block;
+  width: 5%;
+  margin: 0 0 9px 0;
+}
+
+.notification-icon-btn {
+  line-height: 32px !important;
+}
+
+.notificationIcon {
+  font-size: 26px;
+  color: #7b1fa2;
+}
+
+.notificationIcon:hover {
+  color: tomato;
+}
+
+.notificationNumber {
+  background: red;
+  border-radius: 50%;
+  padding: 2px;
+  color: white;
+  font-weight: bold;
+  font-size: 11px;
+  vertical-align: text-bottom !important;
+  margin: -6px !important;
+}
+
+.image-avatar {
+   border-radius: 50%;
+  float: left;
+}
+
+.messageUnRead {
+  float: left;
+  margin: -9px 0 0 7px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #7b1fa2;
+  word-wrap: break-word !important;
+  width: 80%;
+  text-align: justify;
+}
+
+.messageRead {
+  float: left;
+  margin: -9px 0 0 7px;
+  font-size: 14px;
+  color: #7b1fa2;
+  word-wrap: break-word !important;
+  width: 80%;
+  text-align: justify;
+}
+
+.date-heading {
+  float: left;
+  margin: 7px 0 0 -291px;
+  font-size: 12px;
+  font-style: italic;
+}
+
+::ng-deep .mat-menu-panel {
+  padding: 0 10px!important;
+  width: 100%!important;
+  max-width: 100%!important;
+}
+
+::ng-deep .cdk-overlay-pane {
+  width: 32%!important;
+}
+
+.mat-menu-btn {
+  height: 52px !important;
+  padding: 0 !important;
+  margin: 10px 0 0 0;
+}
+
+.btn-markAllAsRead {
+  float: right;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 0 0 9px 0;
+  background: #7b1fa2;
+}

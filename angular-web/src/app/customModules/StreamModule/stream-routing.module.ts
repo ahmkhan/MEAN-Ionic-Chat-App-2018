@@ -7,12 +7,16 @@ import { StreamComponent } from '../../components/stream/stream.component';
 import { CommentsComponent } from '../../components/comments/comments.component';
 import { PeopleComponent } from '../../components/people/people.component';
 import {FollowingComponent} from "../../components/following/following.component";
+import {FollowersComponent} from "../../components/followers/followers.component";
+import {NotificatonsComponent} from "../../components/notificatons/notificatons.component";
 
 const streamRoutes: Routes = [
   {path: 'streams', component: StreamComponent, canActivate: [AuthGuard]},
   {path: 'comments/:id', component: CommentsComponent, canActivate: [AuthGuard]},
   {path: 'people', component: PeopleComponent, canActivate: [AuthGuard]},
-  {path: 'people/following', component: FollowingComponent, canActivate: [AuthGuard]}
+  {path: 'people/following', component: FollowingComponent, canActivate: [AuthGuard]},
+  {path: 'people/followers', component: FollowersComponent, canActivate: [AuthGuard]},
+  {path: 'notifications', component: NotificatonsComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

@@ -53,11 +53,13 @@
                   </a>
                 </mat-list-item>
 
-                    <mat-list-item>
-                            <div mat-line>
-                                <p class="listItemName">Followers</p>
-                                <button mat-button class="sendBtn"><i class="material-icons for-font-class">people_outline</i></button>
-                            </div>
+                    <mat-list-item [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                      <a [routerLink]="['/people', 'followers']" class="anchor-sidebar">
+                        <div mat-line>
+                          <p class="listItemName">Followers</p>
+                          <button mat-button class="sendBtn"><i class="material-icons for-font-class">person_outline</i></button>
+                        </div>
+                      </a>
                         </mat-list-item>
 
                         <mat-list-item>
@@ -67,11 +69,13 @@
                                 </div>
                             </mat-list-item>
 
-                            <mat-list-item>
-                                    <div mat-line>
-                                        <p class="listItemName">Notifications</p>
-                                        <button mat-button class="sendBtn"><i class="material-icons for-font-class">alarm</i></button>
-                                    </div>
+                            <mat-list-item [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                              <a [routerLink]="['/notifications']" class="anchor-sidebar">
+                                <div mat-line>
+                                  <p class="listItemName">Notifications</p>
+                                  <button mat-button class="sendBtn"><i class="material-icons for-font-class">alarm</i></button>
+                                </div>
+                              </a>
                                 </mat-list-item>
 
           </mat-list>

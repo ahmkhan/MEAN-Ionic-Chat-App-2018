@@ -16,19 +16,24 @@ export class PeopleComponent implements OnInit {
   loggedInUser: any;
   usersArr: any;
   socketIO: any;
+  snackBarConfig: any;
 
   constructor(private peopleService: PeopleService, private tokenService: TokenService, private popupMsg: MatSnackBar, private spinnerService: SpinnerService) {
     this.socketIO = io('http://localhost:4000');
+    this.snackBarConfig = new MatSnackBarConfig();
+    this.snackBarConfig.panelClass = ['custom-class'];
+    this.snackBarConfig.duration = 2000;
+    this.snackBarConfig.verticalPosition = 'top';
   }
 
   ngOnInit() {
     this.loggedInUser = this.tokenService.getPayload();
     this.getAllPeoples();
-    this.getPeopleById();
+    this.getPeopleByIdPeople();
 
     this.socketIO.on('refreshPage', () => {
       this.getAllPeoples();
-      this.getPeopleById();
+      this.getPeopleByIdPeople();
     });
   }
 
@@ -45,10 +50,17 @@ export class PeopleComponent implements OnInit {
     });
   };
 
-  getPeopleById() {
+  getPeopleByIdPeople() {
     this.peopleService.getPeoples_UsersById(this.loggedInUser.data._id).then((success: any) => {
       success.subscribe((userById:any) => {
-        this.usersArr = userById.Users.UserFollowing;
+        if (userById.status) {
+          if (userById.Users.UserFollowing.length) {
+            this.usersArr = userById.Users.UserFollowing;
+          }
+          else {
+            this.usersArr = [];
+          }
+        }
       }, (errById) => {
         console.log('error on Get User by Id during subscribe', errById);
       });
@@ -59,24 +71,18 @@ export class PeopleComponent implements OnInit {
 
 
   followUserBtn(people: any) {
-    const snackBarConfig = new MatSnackBarConfig();
-    snackBarConfig.panelClass = ['custom-class'];
-    snackBarConfig.duration = 2000;
-    snackBarConfig.verticalPosition = 'top';
-
     this.spinnerService.showSpinner(true);
-
     this.peopleService.followUserMethod(people._id).subscribe((success: any) => {
       if (success.status) {
-        this.socketIO.emit('refresh', {});
-        this.popupMsg.open(success.message, '', snackBarConfig);
+        this.popupMsg.open(success.message, '', this.snackBarConfig);
         setTimeout(() => {
+          this.socketIO.emit('refresh', {});
           this.spinnerService.showSpinner(false);
         }, 2000);
       }
     }, (err) => {
       console.log('err', err);
-      this.popupMsg.open(err.message, '', snackBarConfig);
+      this.popupMsg.open(err.message, '', this.snackBarConfig);
       setTimeout(() => {
         this.spinnerService.showSpinner(false);
       }, 2000);

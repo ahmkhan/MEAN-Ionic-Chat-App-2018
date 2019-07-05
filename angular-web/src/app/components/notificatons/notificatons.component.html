@@ -1,0 +1,28 @@
+<app-toolbar></app-toolbar>
+
+<div class='main-component-div'>
+
+  <div class='side-component-div'>
+    <app-side></app-side>
+  </div>
+
+  <div class='post-component-div'>
+
+    <mat-card class="notificationListCard" *ngFor="let notification of notificationsArr">
+      <mat-card-content>
+        <img class="image-avatar" src="http://placehold.it/50x50" alt="Desc 1">
+        <p class="message">{{notification.Message}}</p>
+        <p class="date-heading">{{timeFromNowConvert(notification.CreatedAt)}}</p>
+        <a class="readIcon" href="javascript:void(0)">
+          <i *ngIf="!notification.MsgRead" class="material-icons">brightness_1</i>
+          <i *ngIf="notification.MsgRead" class="material-icons">panorama_fish_eye</i>
+        </a>
+        <div class="notificationActionsBtnDiv">
+          <i class="material-icons" (click)="markNotificationAsRead(notification)" [ngClass]="notification.MsgRead ? 'disabled' : 'notDisabled'">check_circle</i>
+          <i class="material-icons" (click)="deleteNotification(notification)">delete_forever</i>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

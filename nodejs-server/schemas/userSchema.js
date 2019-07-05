@@ -14,6 +14,16 @@ const userSchema = mongoose.Schema({
     ],
     UserFollowers: [
         {UserFollower: {type: mongoose.Schema.Types.ObjectId, ref:'Users'}}
+    ],
+    Notifications: [
+        {
+            SenderId: {type: mongoose.Schema.Types.ObjectId, ref:'Users'},
+            Message: {type: String},
+            ViewProfile: {type: Boolean, default: false},
+            CreatedAt: {type: Date, default: Date.now()},
+            MsgRead: {type: Boolean, default: false},
+            NotificationViewDate: {type: String, default: ''}
+        }
     ]
 });
 

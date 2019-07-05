@@ -1,0 +1,64 @@
+.side-component-div {
+  float: left;
+  width: 30%;
+}
+
+.post-component-div {
+  display: inline-block;
+  width: 70%;
+  margin: 90px 0 0 0;
+}
+
+.notificationListCard {
+  width: 70%;
+}
+
+.image-avatar {
+  border-radius: 50%;
+  float: left;
+}
+
+.message {
+  display: inline-block;
+  margin: 4px 0 6px 7px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #7b1fa2;
+  word-wrap: break-word !important;
+  width: 80%;
+  text-align: justify;
+}
+
+.date-heading {
+  margin: 0 0 0 58px;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.readIcon {
+  float: right;
+  margin: -40px 0 0 0;
+}
+
+.notificationActionsBtnDiv {
+  display: inline-block;
+  margin: 5px 0 0 5px;
+}
+
+.notificationActionsBtnDiv > i {
+  font-size: 32px;
+  font-weight: bold;
+  color: #7b1fa2;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.notificationActionsBtnDiv > i:hover {
+  color: tomato;
+}
+
+.disabled {
+  color: #dce4ec !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
