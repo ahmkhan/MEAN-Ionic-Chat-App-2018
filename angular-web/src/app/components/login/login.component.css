@@ -13,7 +13,9 @@
     text-align: center;
     display: inline-block;
     background-color: #7b1fa2;
-    padding: 10px 0 10px 0
+    padding: 10px 0 10px 0;
+    color: white;
+    font-weight: bold;
 }
 
 .login-container > form > mat-form-field {
@@ -25,6 +27,8 @@
     width: 20%;
     border-color: #7b1fa2;
     float: right;
+    color: white;
+  font-weight: bold;
 }
 
 ::ng-deep snack-bar-container.custom-class {

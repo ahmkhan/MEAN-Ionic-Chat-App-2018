@@ -2,21 +2,21 @@
         <div class='sub-div'>
             <a class="top-header-anchor" href="#">
                 <span class="top-header-span">Posts</span>
-                <p class="top-header-para">10</p>
+                <p class="top-header-para">{{userDataObj && userDataObj.Posts.length}}</p>
             </a>
         </div>
 
-        <div class='sub-div'>
-                <a class="top-header-anchor" href="#">
+        <div class='sub-div' [routerLinkActive]="['']" [routerLinkActiveOptions]="{exact: true}">
+                <a class="top-header-anchor" [routerLink]="['/people', 'following']">
                     <span class="top-header-span">Following</span>
-                    <p class="top-header-para">12</p>
+                    <p class="top-header-para">{{userDataObj && userDataObj.UserFollowing.length}}</p>
                 </a>
             </div>
 
-        <div class='sub-div'>
-            <a class="top-header-anchor" href="#">
+        <div class='sub-div' [routerLinkActive]="['']" [routerLinkActiveOptions]="{exact: true}">
+            <a class="top-header-anchor" [routerLink]="['/people', 'followers']">
                 <span class="top-header-span">Followers</span>
-                <p class="top-header-para">10</p>
+                <p class="top-header-para">{{userDataObj && userDataObj.UserFollowers.length}}</p>
             </a>
         </div>
     </div>

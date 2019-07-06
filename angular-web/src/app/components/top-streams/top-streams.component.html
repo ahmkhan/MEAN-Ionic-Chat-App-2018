@@ -1,0 +1,34 @@
+<mat-card *ngFor="let posts of userTopPostsArray">
+  <mat-list>
+
+    <mat-list-item>
+      <img mat-list-avatar src="http://placehold.it/50x50" alt="Desc 1">
+      <h3 mat-line class="username-heading">{{posts.UserName}}</h3>
+      <p mat-line class="date-heading">{{timeFromNowConvert(posts.CreatedAt)}}</p>
+      <p mat-line class="country-heading">Country</p>
+
+    </mat-list-item>
+  </mat-list>
+
+  <mat-card-content>
+    <div class="post-image">
+      <img class="post-image" src="https://media.istockphoto.com/photos/christmas-lights-defocused-background-bokeh-gold-blue-picture-id613518332?k=6&m=613518332&s=612x612&w=0&h=Own5MdgJXjNhFd0YUyED1UP3mQsHeNhfML9F-DQYdYw=">
+    </div>
+
+    <p class="user-post-content">
+      {{posts.Post}}
+    </p>
+
+    <div class="post-action-btns">
+      <div class="like-Btn-div">
+        <i class="material-icons" (click)="likePost(posts, $event)" [ngClass]="(!checkUserExistsInLikeArray(posts.Likes, userDetails.data.UserName)) ? '' : 'likedClass'">thumb_up</i>
+        <span class="number-post-response">{{posts.TotalLikes}}</span>
+      </div>
+
+      <div class="comment-Btn-div">
+        <i class="material-icons" (click)="openCommentsPage(posts)" [ngClass]="(!checkUserExistsInLikeArray(posts.Comments, userDetails.data.UserName)) ? '' : 'likedClass'">comment</i>
+        <span class="number-post-response">{{posts.Comments.length}}</span>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

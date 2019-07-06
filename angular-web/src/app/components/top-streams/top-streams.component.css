@@ -1,0 +1,50 @@
+.rateIcon {
+  width: 1%;
+}
+
+.username-heading {
+  color: #7b1fa2;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  padding: 0 0 2px 0 !important;
+}
+
+.date-heading, .country-heading {
+  color: darkgray;
+  font-size: 14px !important;
+  padding: 0 0 2px 0 !important;
+}
+
+.post-image {
+  width: 60%;
+  margin: 0 0 0 10px;
+}
+
+.user-post-content {
+  margin: 5px 0 20px 20px;
+  color: #7b1fa2;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.post-action-btns {
+  width: 40%;
+  float: left;
+  margin: -12px 0 0 22px;
+}
+
+.like-Btn-div, .comment-Btn-div {
+  display: inline-block;
+  width: 25%;
+  cursor: pointer;
+}
+
+.number-post-response {
+  float: right;
+  width: 35%;
+  margin: 4px 5px 0 0;
+}
+
+.likedClass {
+  color: lightblue;
+}

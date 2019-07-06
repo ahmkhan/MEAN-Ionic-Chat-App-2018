@@ -3,7 +3,12 @@
 }
 
 ::ng-deep .mat-tab-label {
-    width: 50%;
+    width: 55%;
+    font-size: 18px;
+    background: #7b1fa2;
+    color: white;
+    font-weight: bold;
+    margin: 0 1px 0 0;
 }
 
 .heading {

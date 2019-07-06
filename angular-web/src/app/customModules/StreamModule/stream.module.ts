@@ -52,6 +52,7 @@ import { PeopleService } from 'src/app/services/people.service';
 import { FollowingComponent } from '../../components/following/following.component';
 import { FollowersComponent } from '../../components/followers/followers.component';
 import { NotificatonsComponent } from '../../components/notificatons/notificatons.component';
+import { TopStreamsComponent } from '../../components/top-streams/top-streams.component';
 
 
 @NgModule({
@@ -94,7 +95,7 @@ import { NotificatonsComponent } from '../../components/notificatons/notificaton
     HttpClientModule,
     RouterModule
   ],
-  declarations: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent, PeopleComponent, FollowingComponent, FollowersComponent, NotificatonsComponent],
+  declarations: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent, PeopleComponent, FollowingComponent, FollowersComponent, NotificatonsComponent, TopStreamsComponent],
   exports: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent, PeopleComponent],
   providers: [TokenService, PostService, PeopleService]
 })

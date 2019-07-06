@@ -2,14 +2,29 @@
 
 <div class='main-component-div'>
 
-    <div class='side-component-div'>
-        <app-side></app-side>
-    </div>
+  <div class='side-component-div'>
+      <app-side></app-side>
+  </div>
 
-    <div class='post-component-div'>
+  <br>
+
+  <mat-tab-group (selectedTabChange)="changeTabsEvent($event)">
+
+    <mat-tab label="Streams" class="streamsTab">
+      <div class='post-component-div' *ngIf="streamsTab">
         <app-post-forms></app-post-forms>
         <app-user-posts></app-user-posts>
-    </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Top Streams">
+      <div class='post-component-div' *ngIf="topStreamsTab">
+        <app-top-streams></app-top-streams>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+
 
 </div>
 

@@ -5,6 +5,15 @@
 
 .post-component-div {
     display: inline-block;
-    width: 40%;
-    margin: 90px 0 0 0;
+    width: 70%;
+    margin: 38px 0 0 0;
+}
+
+::ng-deep .mat-tab-label {
+  width: 55%;
+  font-size: 18px;
+  background: #7b1fa2;
+  color: white;
+  font-weight: bold;
+  margin: 0 1px 0 0;
 }

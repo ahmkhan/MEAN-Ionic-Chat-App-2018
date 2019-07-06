@@ -17,7 +17,9 @@
     text-align: center;
     display: inline-block;
     background-color: #7b1fa2;
-    padding: 10px 0 10px 0
+    padding: 10px 0 10px 0;
+    color: white;
+    font-weight: bold;
 }
 
 .signup-container > form > .signUpBtn {
