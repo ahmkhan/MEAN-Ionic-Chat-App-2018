@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import * as moment from 'moment';
 import {PeopleService} from '../../services/people.service';
@@ -19,9 +19,11 @@ export class ToolbarComponent implements OnInit {
   socketIO: any;
   snackBarConfig: any;
   hasNotifications: boolean;
-  countNotifications: any =[];
+  countNotifications: any = [];
+  chatListArr: any;
+  msgNumber: number = 0;
 
-  constructor(private tokenService: TokenService, private router: Router, private peopleService: PeopleService, private popupMsg: MatSnackBar, private spinnerService: SpinnerService) {
+  constructor(private tokenService: TokenService, private router: Router, private peopleService: PeopleService, private popupMsg: MatSnackBar, private spinnerService: SpinnerService, private actRouter: ActivatedRoute) {
     this.socketIO = io('http://localhost:4000');
     this.snackBarConfig = new MatSnackBarConfig();
     this.snackBarConfig.panelClass = ['custom-class'];
@@ -61,6 +63,14 @@ export class ToolbarComponent implements OnInit {
             this.notificationsArr = [];
             this.hasNotifications = false;
           }
+
+          if (userByUserName.Users.ChatList.length) {
+            this.chatListArr = userByUserName.Users.ChatList;
+            this.checkMessageReadMethod(this.chatListArr);
+          }
+          else {
+            this.chatListArr = [];
+          }
         }
       }, (errByUserName) => {
         console.log('error on Get User by UserName during subscribe', errByUserName);
@@ -76,6 +86,21 @@ export class ToolbarComponent implements OnInit {
         this.router.navigate(['']);
       }
     });
+  };
+
+
+  checkMessageReadMethod(arr) {
+    const checkingArr = [];
+    for (let y = 0; y < arr.length; y++) {
+      const receiver = arr[y].MessageId.Messages[arr[y].MessageId.Messages.length - 1];
+
+      if (this.router.url != `/chat/${receiver.SenderUserName}`) {
+        if (receiver.MsgIsRead == false && receiver.ReceiverUserName == this.userName.data.UserName) {
+          checkingArr.push(1);
+          this.msgNumber = _.sum(checkingArr);
+        }
+      }
+    }
   };
 
 

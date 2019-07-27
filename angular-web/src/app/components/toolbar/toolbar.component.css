@@ -43,10 +43,8 @@
     margin: 0;
 }
 
-.notification-icon {
-  display: inline-block;
-  width: 5%;
-  margin: 0 0 9px 0;
+.notification-btns-div {
+  margin: 0 15px 5px 0;
 }
 
 .notification-icon-btn {
@@ -90,18 +88,17 @@
 }
 
 .messageRead {
-  float: left;
+  display: block;
   margin: -9px 0 0 7px;
   font-size: 14px;
   color: #7b1fa2;
   word-wrap: break-word !important;
-  width: 80%;
   text-align: justify;
 }
 
 .date-heading {
-  float: left;
-  margin: 7px 0 0 -291px;
+  display: block;
+  margin: -79px 0 0 0;
   font-size: 12px;
   font-style: italic;
 }
@@ -130,4 +127,47 @@
   text-decoration: none;
   margin: 0 0 9px 0;
   background: #7b1fa2;
+}
+
+.msg-userName-p {
+  display: block;
+  margin: -9px 0 0 56px;
+  font-size: 14px;
+  color: #7b1fa2;
+  font-weight: bold;
+  width: 25%;
+}
+
+.msg-date-heading {
+  float: right;
+  margin: -48px 6px 0 0;
+  color: #7b1fa2;
+  font-style: italic;
+
+}
+
+.msg-userMsg-p {
+  margin: -28px 0 0 56px;
+  font-size: 14px;
+  color: grey;
+  word-wrap: break-word !important;
+  word-break: break-all !important;
+  text-align: justify;
+}
+
+.msg-status-icon {
+  float: right;
+  margin: -34px 3px 0 0;
+  color: blue;
+}
+
+.msgNotificationNumber {
+  background: red;
+  border-radius: 50%;
+  padding: 2px;
+  color: white;
+  font-weight: bold;
+  font-size: 11px;
+  vertical-align: text-bottom !important;
+  margin: -2px !important;
 }

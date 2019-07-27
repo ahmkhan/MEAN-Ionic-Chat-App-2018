@@ -17,7 +17,6 @@ export class StreamComponent implements OnInit {
   ngOnInit() {
     this.streamsTab = true;
     this.token = this.tokenService.getPayload();
-    console.log('this.token', this.token);
   };
 
   changeTabsEvent(tabsValue) {

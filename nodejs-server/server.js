@@ -8,6 +8,7 @@ const authRoutes = require('./routes/authRoutes');
 const postRoutes = require('./routes/postRoutes');
 const peopleRoutes = require('./routes/peopleRoutes');
 const followRoutes = require('./routes/followRoutes');
+const messagesRoutes = require('./routes/messagesRoutes');
 
 const app = express();
 
@@ -15,6 +16,9 @@ const app = express();
 const server = require('http').createServer(app);
 const socketIO =  require('socket.io').listen(server);
 //Socket.IO
+
+require('./socket/streams')(socketIO);
+require('./socket/privateChat')(socketIO);
 
 const dbConfig = require('./config/secret');
 mongoose.Promise = global.Promise;
@@ -28,20 +32,21 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 app.use(cors());
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Methods', 'GET', 'POST', 'PUT', 'DELETE', 'OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    next();
-});
+//Disable this because this functionality is working on Line # 30 i.e.app.use(cors());
 
-require('./socket/streams')(socketIO);
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Credentials', 'true');
+//     res.header('Access-Control-Allow-Methods', 'GET', 'POST', 'PUT', 'DELETE', 'OPTIONS');
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+//     next();
+// });
 
 app.use('/api/chatapp', authRoutes);
 app.use('/api/chatapp', postRoutes);
 app.use('/api/chatapp', peopleRoutes);
 app.use('/api/chatapp', followRoutes);
+app.use('/api/chatapp', messagesRoutes);
 
 server.listen(port, () => {
     console.log('Server is Running on ' + port);

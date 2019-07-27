@@ -9,7 +9,9 @@ module.exports.GetAllUsers = async (req, res) => {
         const allPeoples = await UserSchema.find({})
             .populate('Posts.PostId')
             .populate('UserFollowing.UserFollowed')
-            .populate('UserFollowers.UserFollower');
+            .populate('UserFollowers.UserFollower')
+            .populate('ChatList.ReceiverId')
+            .populate('ChatList.MessageId');
 
         res.status(HttpStatus.OK).json({message:'All Users Found Successfully', Users: allPeoples});
     }
@@ -24,7 +26,9 @@ module.exports.GetUserById = async (req, res) => {
         const peopleById = await UserSchema.findOne({_id: req.params.id})
             .populate('Posts.PostId')
             .populate('UserFollowing.UserFollowed')
-            .populate('UserFollowers.UserFollower');
+            .populate('UserFollowers.UserFollower')
+            .populate('ChatList.ReceiverId')
+            .populate('ChatList.MessageId');
 
         res.status(HttpStatus.OK).json({status: true, message:'User by Id Found Successfully', Users: peopleById});
     }
@@ -39,7 +43,9 @@ module.exports.GetUserByUserName = async (req, res) => {
         const PeopleByUserName = await UserSchema.findOne({UserName: req.params.userName})
             .populate('Posts.PostId')
             .populate('UserFollowing.UserFollowed')
-            .populate('UserFollowers.UserFollower');
+            .populate('UserFollowers.UserFollower')
+            .populate('ChatList.ReceiverId')
+            .populate('ChatList.MessageId');
 
         res.status(HttpStatus.OK).json({status: true, message:'User by UserName Found Successfully', Users: PeopleByUserName});
     }

@@ -3,20 +3,24 @@
   <span (click)="goStreamPage()" class="toolbar-heading">My Toolbar</span>
     <span class="spacer"></span>
 
-    <span class="notification-icon">
+    <div class="notification-btns-div">
+      <!--NOTIFICATION ICON STARTS-->
+      <span class="notification-icon">
       <button class="notification-icon-btn" mat-icon-button aria-label="Notifications Menu" [mat-menu-trigger-for]="menu">
         <mat-icon class="notificationIcon">notification_important</mat-icon>
         <span class="notificationNumber" *ngIf="countNotifications.length > 0">{{countNotifications.length}}</span>
       </button>
         <mat-menu #menu="matMenu">
 
-          <div *ngIf="hasNotifications">
+          <div *ngIf="hasNotifications" class="notifications-msg-div">
             <button mat-menu-item class="mat-menu-btn" *ngFor="let notification of notificationsArr">
                 <img class="image-avatar" src="http://placehold.it/50x50" alt="Desc 1">
                 <p [ngClass]="notification.MsgRead ? 'messageRead' : 'messageUnRead' ">{{notification.Message}}</p>
+                <br>
                 <p class="date-heading">{{timeFromNowConvert(notification.CreatedAt)}}</p>
             </button>
-            <button class="btn-markAllAsRead" mat-raised-button (click)="markAllAsRead()">Mark all as Read</button>
+
+            <button type="button" class="btn-markAllAsRead" mat-raised-button [disabled]="!countNotifications.length || countNotifications.length == 0" (click)="markAllAsRead()">Mark all as Read</button>
           </div>
 
           <div *ngIf="!hasNotifications">
@@ -28,12 +32,46 @@
           </mat-list>
             </button>
           </div>
-
-
-
-
       </mat-menu>
     </span>
+      <!--NOTIFICATION ICON ENDS-->
+
+
+      <!--MESSAGES ICON STARTS-->
+      <span class="messages-icon">
+      <button class="notification-icon-btn" mat-icon-button aria-label="Notifications Menu" [mat-menu-trigger-for]="menu1">
+        <mat-icon class="notificationIcon">message</mat-icon>
+        <span class="msgNotificationNumber" *ngIf="msgNumber > 0">{{msgNumber}}</span>
+      </button>
+        <mat-menu #menu1="matMenu">
+
+            <button mat-menu-item class="mat-menu-btn" *ngFor="let chat of chatListArr" [routerLink]="['/chat', chat.ReceiverId.UserName]">
+              <img class="image-avatar" src="http://placehold.it/50x50" alt="Desc 1">
+              <p class="msg-userName-p">{{chat.ReceiverId.FullName}}</p>
+              <p class="msg-date-heading">{{timeFromNowConvert(chat.MessageId.Messages[chat.MessageId.Messages.length - 1].CreatedAt)}}</p>
+
+              <p class="msg-userMsg-p">{{chat.MessageId.Messages[chat.MessageId.Messages.length - 1].MessageText}}</p>
+              <i class="material-icons msg-status-icon" *ngIf="!chat.MessageId.Messages[chat.MessageId.Messages.length - 1].MsgIsRead && chat.ReceiverId.UserName !== chat.MessageId.Messages[chat.MessageId.Messages.length - 1].ReceiverUserName">brightness_1</i>
+              <i *ngIf="chat.MessageId.Messages[chat.MessageId.Messages.length - 1].MsgIsRead" class="material-icons">panorama_fish_eye</i>
+
+            </button>
+            <button class="btn-markAllAsRead" mat-raised-button (click)="markAllAsRead()">Mark all as Read</button>
+
+          <div *ngIf="!hasNotifications">
+            <button mat-menu-item>
+            <mat-list role="list" *ngIf="!hasNotifications">
+            <mat-list-item role="listitem">
+                No Notifications
+            </mat-list-item>
+          </mat-list>
+            </button>
+          </div>
+      </mat-menu>
+    </span>
+      <!--MESSAGES ICON ENDS-->
+    </div>
+
+
 
     <button mat-button class="logoutBtn" (click)="logoutBtn()"><i class="fas fa-sign-out-alt logoutIcon"></i>Logout</button>
   </mat-toolbar-row>

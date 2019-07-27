@@ -24,6 +24,12 @@ const userSchema = mongoose.Schema({
             MsgRead: {type: Boolean, default: false},
             NotificationViewDate: {type: String, default: ''}
         }
+    ],
+    ChatList: [
+        {
+            ReceiverId: {type: mongoose.Schema.Types.ObjectId, ref:'Users'},
+            MessageId: {type: mongoose.Schema.Types.ObjectId, ref:'Messages'}
+        }
     ]
 });
 

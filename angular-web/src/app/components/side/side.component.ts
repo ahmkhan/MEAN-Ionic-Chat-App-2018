@@ -35,7 +35,6 @@ export class SideComponent implements OnInit {
   getPeopleByUserName() {
     this.peopleService.getPeoples_UsersByUserName(this.userDetails.data.UserName).then((success: any) => {
       success.subscribe((userByUserName:any) => {
-        console.log('ggggg', userByUserName)
         if (userByUserName.status) {
             this.userDataObj = userByUserName.Users;
         }

@@ -38,8 +38,12 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { NgxAutoScrollModule } from "ngx-auto-scroll";
+import { EmojiPickerModule } from "ng2-emoji-picker";
+
 import { TokenService } from '../../services/token.service';
 import { PostService } from 'src/app/services/post.service';
+import { MessagesService } from 'src/app/services/messages.service';
 
 import { StreamComponent } from '../../components/stream/stream.component';
 import { ToolbarComponent } from '../../components/toolbar/toolbar.component';
@@ -53,6 +57,8 @@ import { FollowingComponent } from '../../components/following/following.compone
 import { FollowersComponent } from '../../components/followers/followers.component';
 import { NotificatonsComponent } from '../../components/notificatons/notificatons.component';
 import { TopStreamsComponent } from '../../components/top-streams/top-streams.component';
+import { ChatComponent } from '../../components/chat/chat.component';
+import { MessagesComponent } from '../../components/messages/messages.component';
 
 
 @NgModule({
@@ -93,10 +99,12 @@ import { TopStreamsComponent } from '../../components/top-streams/top-streams.co
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    NgxAutoScrollModule,
+    EmojiPickerModule.forRoot()
   ],
-  declarations: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent, PeopleComponent, FollowingComponent, FollowersComponent, NotificatonsComponent, TopStreamsComponent],
+  declarations: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent, PeopleComponent, FollowingComponent, FollowersComponent, NotificatonsComponent, TopStreamsComponent, ChatComponent, MessagesComponent],
   exports: [StreamComponent, ToolbarComponent, SideComponent, PostFormsComponent, UserPostsComponent, CommentsComponent, PeopleComponent],
-  providers: [TokenService, PostService, PeopleService]
+  providers: [TokenService, PostService, PeopleService, MessagesService]
 })
 export class StreamModule { }

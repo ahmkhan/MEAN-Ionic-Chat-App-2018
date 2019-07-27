@@ -1,0 +1,58 @@
+<div class="main-message-div">
+
+  <div class="message-header-div">
+    <div class="message-header-content">
+      <img mat-list-avatar src="http://placehold.it/75x75" alt="Desc 1" class="message-header-userImage">
+      <p class="message-header-userName">{{receiverData && receiverData.FullName}}</p>
+      <p class="message-header-userStatus">Online</p>
+    </div>
+  </div>
+
+  <div class="message-content-div" ngx-auto-scroll lock-y-offset="10" observe-attributes>
+    <div class="message-wrapper-div" *ngFor="let message of messagesArr">
+
+        <div class="chat-bubble left slide-left" *ngIf="loggedInUser.data.UserName !== receiverUserName && loggedInUser.data.UserName !== message.SenderUserName">
+          <div class="chatMessage">{{message.MessageText}}</div>
+        </div>
+
+        <div class="chat-bubble right slide-right" *ngIf="loggedInUser.data.UserName == message.SenderUserName">
+          <div class="chatMessage">{{message.MessageText}}</div>
+        </div>
+
+    </div>
+
+    <div class="chat-bubble middle slide-left" *ngIf="isTyping">
+      <div class="chatMessage">{{receiverData.FullName}} is typing....</div>
+    </div>
+  </div>
+
+  <div class="message-footer-div">
+    <mat-card>
+      <mat-card-footer>
+        <mat-form-field class="send-msg-txtFieldDiv">
+          <textarea matInput (keypress)="isUserTyping()" [(ngModel)]="getMsgText" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" placeholder="Type your message here"></textarea>
+        </mat-form-field>
+
+        <div class="emoji-send-btns-div">
+
+          <button type="button" class="emojiIcon-btn" (click)="toggled = !toggled">😄</button>
+          <i class="material-icons send-msg-icon" label="Send Message" (click)="sendMessages()">send</i>
+
+          <div class="emoji-content-editable"
+               (emojiPickerCaretEmitter)="handleCurrentCaret($event)"
+               (input)="content = $event.target.textContent"
+               [textContent]="content"
+               contenteditable="true"></div>
+          <i
+            class="emoji-toggle-button"
+            [(emojiPickerIf)]="toggled"
+            [emojiPickerPreserveSelection]="false"
+            [emojiPickerDirection]="direction"
+            [emojiPickerAutofocus]="true"
+            (emojiPickerSelect)="handleSelection($event)"></i>
+
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import {PeopleService} from '../../services/people.service';
 import {TokenService} from '../../services/token.service';
@@ -18,7 +19,7 @@ export class PeopleComponent implements OnInit {
   socketIO: any;
   snackBarConfig: any;
 
-  constructor(private peopleService: PeopleService, private tokenService: TokenService, private popupMsg: MatSnackBar, private spinnerService: SpinnerService) {
+  constructor(private peopleService: PeopleService, private tokenService: TokenService, private popupMsg: MatSnackBar, private spinnerService: SpinnerService, private router: Router) {
     this.socketIO = io('http://localhost:4000');
     this.snackBarConfig = new MatSnackBarConfig();
     this.snackBarConfig.panelClass = ['custom-class'];
@@ -98,6 +99,11 @@ export class PeopleComponent implements OnInit {
     else {
       return false;
     }
+  };
+
+
+  renderChatPage(userName) {
+    this.router.navigate(['/chat', userName]);
   };
 
 }

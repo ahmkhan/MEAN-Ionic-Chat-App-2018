@@ -142,6 +142,6 @@ module.exports.markAllNotificationsAsRead = (req, res) => {
                 res.status(HttpStatus.OK).json({status: true, message:'All Notifications Successfully Mark as Read'});
         })
             .catch((err) => {
-                    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({status: false, message:'Error occurred on ll Notifications Mark as Read'});
+                    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({status: false, message:'Error occurred on Notifications Mark as Read'});
             });
 };
